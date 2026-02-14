@@ -1,11 +1,17 @@
-/* --- 1. CONFIGURAÇÕES GERAIS (ESTILO ROMANCE) --- */
-body {
-    background-color: #fff9f8; /* Off-white com um toque rosado */
+/* --- 1. CONFIGURAÇÕES GERAIS E TRAVA DE TELA --- */
+html, body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden; /* Impede o site de balançar para os lados */
+    background-color: #fff9f8; 
     -webkit-font-smoothing: antialiased;
     font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 /* Detalhe de iluminação suave (Pétalas e Luxo) */
@@ -19,228 +25,160 @@ body::before {
     z-index: -1;
 }
 
-/* --- 2. BANNER DE APRESENTAÇÃO --- */
-.admin-banner {
-    width: 90%;
-    max-width: 1100px;
-    margin: 60px auto;
-    padding: 60px 40px;
-    /* Gradiente sofisticado: Creme para Rosa Seco */
-    background: linear-gradient(135deg, #fff5f5 0%, #f7e1e1 100%);
-    border-radius: 8px; /* Bordas mais retas para elegância */
-    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.05);
-    position: relative;
-    overflow: hidden;
-    border-left: 8px solid #631c1c; /* Detalhe em vinho na lateral */
-    box-sizing: border-box;
-}
-
-.admin-content {
+/* --- 2. SEU HEADER ORIGINAL (RESTAURADO E SEGURO) --- */
+.header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 40px;
+    padding: 60px 10%;
+    background-color: #631c1c;
+    width: 100%;
+    border-radius: 10px;
 }
 
-.admin-content h1 {
-    flex: 1;
+.header-container h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2.2rem, 5vw, 3.8rem);
-    line-height: 1.1;
+    font-size: clamp(2.2rem, 6vw, 3.8rem);
+    color: #ffffff;
     margin: 0;
-    color: #631c1c; /* Vinho Profundo */
-    font-style: italic;
 }
 
-.admin-description {
-    flex: 1;
-    font-size: clamp(1rem, 1.5vw, 1.15rem);
-    line-height: 1.8;
-    color: #5a4a4a;
-    font-weight: 400;
-    letter-spacing: 0.3px;
+.header-container h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: clamp(1rem, 3vw, 1.8rem);
+    color: #fbfbfbdc;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 380px; 
+    height: 160px;
 }
 
-/* --- 3. GALERIA DE MOMENTOS (CARROSSEL) --- */
-.carrossel-wrapper {
+.header-container h2 span {
+    position: absolute;
+    white-space: nowrap;
+    animation: blurCiclo 4.0s infinite ease-in-out;
+}
+
+.header-container h2::after {
+    content: "";
+    position: absolute;
+    width: 150px; 
+    height: 150px;
+    background-image: url('icone\ sebo\ .png'); 
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    opacity: 0;
+    filter: blur(15px);
+    animation: blurCiclo 4.0s infinite ease-in-out 2.0s;
+}
+
+@keyframes blurCiclo {
+    0% { opacity: 0; filter: blur(15px); transform: scale(0.95); }
+    10%, 40% { opacity: 1; filter: blur(0px); transform: scale(1); }
+    50%, 100% { opacity: 0; filter: blur(15px); transform: scale(0.95); }
+}
+
+/* --- 3. GALERIA DE MOMENTOS (CARROSSEL ADAPTADO) --- */
+.galeria-secao {
     position: relative;
     width: 100%;
-    max-width: 1300px;
-    margin: 40px auto;
+    margin: 40px 0;
 }
 
 .imgg {
     display: flex;
     overflow-x: auto;
     scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
     gap: 20px;
-    padding: 30px 50px;
+    padding: 30px 40px; /* Respiro lateral para os botões não taparem a foto */
     scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
 }
 
 .imgg::-webkit-scrollbar { display: none; }
 
 .imgg img {
-    flex: 0 0 260px;
+    flex: 0 0 260px; /* Largura fixa para manter o estilo */
     height: 380px;
     object-fit: cover;
-    border-radius: 4px !important; /* Fotos com corte limpo */
+    border-radius: 4px !important; 
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); 
     transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-    cursor: pointer;
-    scroll-snap-align: center;
     border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
 .imgg img:hover { 
-    transform: translateY(-15px); /* Flutuação elegante */
+    transform: translateY(-15px);
     box-shadow: 0 25px 50px rgba(99, 28, 28, 0.15);
-    filter: brightness(1.05);
 }
 
-/* --- 4. NAVEGAÇÃO SUTIL --- */
-.seta-decorativa {
+/* --- 4. BOTÕES DE NAVEGAÇÃO (ENCAIXADOS) --- */
+.btn-nav {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 2.5rem;
-    color: #d4a373; /* Tom bronze/ouro */
-    z-index: 10;
-    opacity: 0.6;
-}
-
-.seta-esq { left: 20px; }
-.seta-dir { right: 20px; }
-
-/* --- 5. SEÇÃO DE CHAMADA PARA AÇÃO (COMPRA) --- */
-.compra-infantil {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 100px 20px;
-    background: #ffffff;
-    margin-top: 40px;
-}
-
-.compra-infantil h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 4vw, 3rem);
-    color: #631c1c;
-    margin-bottom: 10px;
-}
-
-.compra-infantil p {
-    font-size: 1.1rem;
-    color: #8c7373;
-    margin-bottom: 40px;
-    font-style: italic;
-}
-
-/* Botão Romance Luxo */
-.btn-infantil {
-    display: inline-block;
-    padding: 22px 70px;
-    background: #631c1c; /* Base Vinho */
-    color: #ffffff !important;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 4px; /* Espaçamento luxuoso */
-    border-radius: 2px;
-    transition: all 0.5s ease;
+    background: rgba(99, 28, 28, 0.8); /* Vinho com transparência */
+    color: white;
     border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
     cursor: pointer;
-    position: relative;
-    overflow: hidden;
+    z-index: 10;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.btn-infantil:hover {
-    background: #4a1414;
-    letter-spacing: 6px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-}
+.prev { left: 10px; }
+.next { right: 10px; }
 
-/* Efeito de brilho passando pelo botão */
-.btn-infantil::after {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%;
-    width: 50%; height: 100%;
-    background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
-    transition: 0.8s;
-}
-
-.btn-infantil:hover::after {
-    left: 150%;
-}
-
-/* --- 6. ADAPTAÇÕES MOBILE --- */
-@media (max-width: 768px) {
-    .admin-banner {
-        width: 95%;
-        padding: 40px 20px;
-        border-left: none;
-        border-top: 6px solid #631c1c;
-    }
-
-    .admin-content h1 { font-size: 2.2rem; text-align: center; }
-    .admin-description { text-align: center; }
-
-    .imgg img {
-        flex: 0 0 220px;
-        height: 320px;
-    }
-
-    .btn-infantil {
-        padding: 18px 40px;
-        font-size: 0.85rem;
-        letter-spacing: 2px;
-    }
-}
-/* --- SEÇÃO DE COMPRA ROMANCE --- */
+/* --- 5. SEÇÃO DE COMPRA (ROMANCE SOFISTICADO) --- */
 .compra-infantil {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 100px 20px;
-    background: #ffffff; /* Fundo limpo para destacar o botão */
-    margin-top: 40px;
+    padding: 80px 20px;
+    background: #ffffff;
 }
 
 .compra-infantil h1 {
     font-family: 'Playfair Display', serif;
     font-size: clamp(1.8rem, 4vw, 2.8rem);
-    color: #631c1c; /* Vinho Profundo */
+    color: #631c1c; 
     margin-bottom: 12px;
     font-style: italic;
 }
 
 .compra-infantil p {
     font-size: 1.15rem;
-    color: #8c7373; /* Cinza Rosado */
+    color: #8c7373; 
     margin-bottom: 40px;
-    font-weight: 300;
     letter-spacing: 0.5px;
 }
 
-/* --- BOTÃO ROMANCE SOFISTICADO --- */
+/* BOTÃO ROMANCE LUXO */
 .btn-infantil {
     display: inline-block;
     padding: 20px 60px;
-    background-color: #631c1c; /* Cor principal Vinho */
+    background-color: #631c1c; 
     color: #ffffff !important;
     text-decoration: none;
     font-weight: 500;
     font-size: 1rem;
     text-transform: uppercase;
-    letter-spacing: 4px; /* Espaçamento luxuoso entre letras */
-    border-radius: 2px; /* Bordas retas são mais maduras que redondas */
+    letter-spacing: 4px; 
+    border-radius: 2px; 
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid transparent;
     cursor: pointer;
@@ -252,30 +190,148 @@ body::before {
     background-color: #ffffff;
     color: #631c1c !important;
     border: 1px solid #631c1c;
-    letter-spacing: 5px; /* Expansão suave no hover */
-    box-shadow: 0 10px 30px rgba(99, 28, 28, 0.1);
+    letter-spacing: 5px; 
     transform: translateY(-3px);
 }
 
-/* Efeito sutil de brilho ao passar o mouse */
 .btn-infantil::before {
     content: '';
     position: absolute;
     top: 0; left: -100%;
     width: 100%; height: 100%;
     background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: all 0.6s;
+    transition: 0.6s;
 }
 
-.btn-infantil:hover::before {
+.btn-infantil:hover::before { left: 100%; }
+
+/* --- 6. ADAPTAÇÕES MOBILE (A PROVA DE CORTES) --- */
+@media (max-width: 768px) {
+    .header-container {
+        padding: 40px 5%;
+        flex-direction: column; /* Impede o título de bater na animação */
+        text-align: center;
+    }
+
+    .header-container h2 {
+        min-width: 100%; /* No celular o H2 se adapta à tela */
+        height: 140px;
+        transform: scale(0.9); /* Encolhe um pouco para caber melhor */
+    }
+
+    .imgg {
+        padding: 20px 15px; /* Menos espaço lateral no celular */
+    }
+
+    .imgg img {
+        flex: 0 0 220px; /* Foto um pouco menor no celular */
+        height: 320px;
+    }
+
+    .btn-nav {
+        width: 38px;
+        height: 38px;
+        background: rgba(99, 28, 28, 0.6);
+    }
+}
+/* --- ESTILIZAÇÃO DA SEÇÃO DE ROMANCE (CTA) --- */
+.secao-romance {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px;
+    background-color: #ffffff; /* Fundo limpo para destaque */
+    width: 100%;
+}
+
+.cta-card-romance {
+    text-align: center;
+    max-width: 700px;
+    padding: 40px;
+    border-radius: 4px; /* Bordas mais retas para o look luxuoso */
+    background: #fff;
+    /* Sombra suave para dar profundidade sem poluir */
+    box-shadow: 0 15px 45px rgba(99, 28, 28, 0.05); 
+    border: 1px solid rgba(99, 28, 28, 0.1);
+}
+
+.cta-card-romance h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    color: #631c1c; /* Vinho Profundo */
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+.cta-card-romance p {
+    font-family: 'SF Pro Display', sans-serif;
+    font-size: 1.1rem;
+    color: #8c7373; /* Cinza Rosado */
+    margin-bottom: 35px;
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+/* BOTÃO ROMANCE (O Explorar Coleção) */
+.btn-romance {
+    display: inline-block;
+    padding: 20px 50px;
+    background-color: #631c1c; /* Cor Vinho */
+    color: #ffffff !important;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 4px; /* Espaçamento luxuoso */
+    border-radius: 2px;
+    border: 1px solid transparent;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-romance:hover {
+    background-color: #ffffff;
+    color: #631c1c !important;
+    border: 5px solid #631c1cbb;
+    letter-spacing: 5px;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(99, 28, 28, 0.15);
+    
+}
+
+/* Efeito de Brilho no Botão */
+.btn-romance::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: 0.6s;
+    
+}
+
+.btn-romance:hover::before {
     left: 100%;
 }
 
-/* Ajuste Mobile */
+/* --- AJUSTE PARA CELULAR --- */
 @media (max-width: 768px) {
-    .btn-infantil {
-        padding: 18px 35px;
+    .secao-romance {
+        padding: 50px 15px;
+    }
+    
+    .cta-card-romance {
+        padding: 30px 20px;
+        width: 100%;
+    }
+
+    .btn-romance {
+        padding: 18px 30px;
         font-size: 0.85rem;
         letter-spacing: 2px;
+        width: 100%; /* Botão ocupa a largura no celular para facilitar o clique */
+        border-radius: 30px;
     }
 }
